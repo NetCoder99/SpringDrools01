@@ -1,0 +1,16 @@
+package com.home.SpringDrools01.rules
+
+import com.home.SpringDrools01.entities.ContactType
+import com.home.SpringDrools01.entities.ContactRecord
+
+
+rule "NotifyContact"
+    when 
+        contactType: ContactType(contactTypeID == 11);
+    then
+        System.out.println("****** Creating Contact Notify Record for: " + contactType.toString() + " ******");
+        ContactRecord contactRecord = new ContactRecord();
+        contactRecord.setName(contactType.name);
+        contactRecord.setMessage("Need to contact based on rule");
+        insert(contactRecord);
+    end
