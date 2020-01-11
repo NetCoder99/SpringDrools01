@@ -1,4 +1,4 @@
-package com.home.SpringDrools01.entities;
+package com.home.SpringDrools01.entities.oracle;
 
 import javax.persistence.*;
 import java.sql.Timestamp;

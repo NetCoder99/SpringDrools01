@@ -1,7 +1,7 @@
 package com.home.SpringDrools01.rules
 
-import com.home.SpringDrools01.entities.ContactType
-import com.home.SpringDrools01.entities.ContactRecord
+import com.home.SpringDrools01.entities.sqlserver.ContactType
+import com.home.SpringDrools01.entities.sqlserver.ContactRecord
 
 
 rule "NotifyContact"

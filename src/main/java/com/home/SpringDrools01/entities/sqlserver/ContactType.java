@@ -1,4 +1,4 @@
-package com.home.SpringDrools01.entities;
+package com.home.SpringDrools01.entities.sqlserver;
 
 import java.io.Serializable;
 import javax.persistence.*;
