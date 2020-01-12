@@ -1,6 +1,7 @@
 package com.home.SpringDrools01.runners;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 import org.kie.api.KieServices;
@@ -13,15 +14,15 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
-import com.home.SpringDrools01.entities.sqlserver.ContactType;
-import com.home.SpringDrools01.repositories.sqlserver.ContactTypeRepository;
+import com.home.SpringDrools01.entities.oracle.Departments;
+import com.home.SpringDrools01.repositories.DepartmentRepository;
 
 @Component
 @Order(1)
 public class DepartmentRunner  implements ApplicationRunner{
 
 	@Autowired
-	private ContactTypeRepository contactTypeRepository;
+	private DepartmentRepository departmentRepository;
 
 	int factsFired = 0;
 
@@ -35,12 +36,16 @@ public class DepartmentRunner  implements ApplicationRunner{
 			KieContainer kContainer = ks.getKieClasspathContainer();
 			KieSession kSession = kContainer.newKieSession("ksession-rules");
 
-			List<ContactType> tmpList = (List<ContactType>) contactTypeRepository.findAll();
+			List<Departments> tmpList = (List<Departments>) departmentRepository.findAll();
+			//tmpList.sort(Comparator.comparing(Departments::getDEPARTMENT_ID));
+			tmpList.sort(Comparator.comparing(Departments::getDEPARTMENT_ID).reversed());
+			
 			tmpList.forEach(rec -> {
 				//System.out.println(rec.toString());
 				factsList.add(kSession.insert(rec));
-				factsFired = kSession.fireAllRules();
+				//factsFired = kSession.fireAllRules();
 			});
+			factsFired = kSession.fireAllRules();
 
 			System.out.println("------ DepartmentRunner Finsihed ------");
 		} catch (Exception ex) {

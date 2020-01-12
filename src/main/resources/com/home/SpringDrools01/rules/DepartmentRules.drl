@@ -1,0 +1,21 @@
+package com.home.SpringDrools01.rules
+
+import com.home.SpringDrools01.entities.oracle.Departments
+import com.home.SpringDrools01.entities.oracle.Locations
+
+
+rule "Has Manager" salience 1
+    when 
+        $department: Departments(MANAGER_ID != null);
+    then
+        System.out.println("*** " + $department.toString() + ": Department Has Manager");
+    end
+    
+rule "No Manager" salience 2
+    when 
+        $department: Departments(MANAGER_ID == null);
+    then
+        System.out.println("*** " + $department.toString() + ": Department No Manager");
+    end
+
+    
